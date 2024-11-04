@@ -13,14 +13,14 @@ namespace vsite::oop::v3
 	{
 	public:
 		results(const int length);
-		~results() = default;
+		~results();
 		void add(const student& new_student);
 		unsigned int has_grade(const int grade) const;
 		unsigned int starts_with_letter(const char letter) const;
 	private:
 		int start = 0;
 		int length;
-		student* results_arr;
+		student* results_arr = nullptr;
 	};
 
 	class array
@@ -30,7 +30,7 @@ namespace vsite::oop::v3
 		array(const uint32_t size, const double value);
 		array(const array& other);
 		array(array&& other);
-		~array() = default;
+		~array();
 		double at(const uint32_t index) const;
 		unsigned int size() const;
 		void push_back(const double value);

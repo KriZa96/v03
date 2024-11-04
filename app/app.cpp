@@ -3,10 +3,11 @@
 
 namespace vsite::oop::v3
 {
-	results::results(const int length)
-	{
-		this->length = length;
-		this->results_arr = new student[length];
+	results::results(const int length): length(length), results_arr(new student[length])
+	{}
+
+	results::~results() {
+		delete[] results_arr;
 	}
 
 	void results::add(const student& new_student)
@@ -34,29 +35,35 @@ namespace vsite::oop::v3
 		return count;
 	}
 	//--------------------------------------------------------------------------------------------
-	array::array(const uint32_t size, const double value)
+	array::array(const uint32_t size, const double value): size_(size), arr_(new double[size])
 	{
-		size_ = size;
-		arr_ = new double[size];
-
 		for (uint32_t i=0; i<size; ++i)
 		{
 			arr_[i] = value;
 		}
 	}
-	array::array(const array& other)
+
+	array::array(const array& other): size_(other.size_), arr_(new double[other.size_])
 	{
-		size_ = other.size_;
-		arr_ = other.arr_;
+		for (int i = 0; i < other.size_; i++) {
+			arr_[i] = other.arr_[i];
+		}
 	}
-	array::array(array&& other)
+
+	array::array(array&& other) : size_(other.size_), arr_(new double[other.size_])
 	{
-		size_ = other.size_;
-		arr_ = other.arr_;
+		for (int i = 0; i < other.size_; i++) {
+			arr_[i] = other.arr_[i];
+		}
 
 		other.size_ = 0;
 		other.arr_ = nullptr;
 	}
+
+	array::~array() {
+		delete[] arr_;
+	}
+
 	double array::at(const uint32_t index) const
 	{
 		if (index < 0 || index >= size_)
@@ -65,10 +72,12 @@ namespace vsite::oop::v3
 		}
 		return arr_[index];
 	}
+
 	unsigned int array::size() const
 	{
 		return size_;
 	}
+
 	void array::push_back(const double value)
 	{
 		this->size_++;
