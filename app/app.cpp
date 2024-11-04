@@ -50,12 +50,8 @@ namespace vsite::oop::v3
 		}
 	}
 
-	array::array(array&& other) : size_(other.size_), arr_(new double[other.size_])
+	array::array(array&& other) : size_(other.size_), arr_(other.arr_)
 	{
-		for (int i = 0; i < other.size_; i++) {
-			arr_[i] = other.arr_[i];
-		}
-
 		other.size_ = 0;
 		other.arr_ = nullptr;
 	}
