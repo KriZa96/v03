@@ -16,8 +16,6 @@ int main()
 
 	results student_results(num_of_results);
 
-	int student_grade;
-	std::string student_name;
 	student current_student;
 	for (int i = 0; i < num_of_results; i++) {
 		std::cout << "Enter student " << i + 1 << " name and grade: ";

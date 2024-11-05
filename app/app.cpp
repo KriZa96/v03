@@ -12,15 +12,17 @@ namespace vsite::oop::v3
 
 	void results::add(const student& new_student)
 	{
-		this->results_arr[start++] = new_student;
+		results_arr[start++] = new_student;
 	}
 
 	unsigned int results::has_grade(const int grade) const
 	{
 		unsigned int count = 0;
-		for (int i = 0; i < this->length; ++i)
+		for (int i = 0; i < length; ++i)
 		{
-			count += static_cast<unsigned int>(this->results_arr[i].grade == grade);
+			if (results_arr[i].grade == grade) {
+				count++;
+			}
 		}
 		return count;
 	}
@@ -28,9 +30,11 @@ namespace vsite::oop::v3
 	unsigned int results::starts_with_letter(const char letter) const
 	{
 		unsigned int count = 0;
-		for (int i = 0; i < this->length; ++i)
+		for (int i = 0; i < length; ++i)
 		{
-			count += static_cast<unsigned int>(std::tolower(this->results_arr[i].name[0]) == std::tolower(letter));
+			if (std::tolower(results_arr[i].name[0]) == std::tolower(letter)) {
+				count++;
+			}
 		}
 		return count;
 	}
@@ -76,7 +80,7 @@ namespace vsite::oop::v3
 
 	void array::push_back(const double value)
 	{
-		this->size_++;
+		size_++;
 
 		double* new_arr = new double[size_];
 		for (unsigned int i = 0; i < size_ - 1; ++i)
@@ -84,9 +88,11 @@ namespace vsite::oop::v3
 			new_arr[i] = arr_[i];
 		}
 
+		delete[] arr_;
+
 		new_arr[size_ - 1] = value;
 
-		this->arr_ = new_arr;
+		arr_ = new_arr;
 	}
 	
 }
